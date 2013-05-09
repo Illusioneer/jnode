@@ -1,0 +1,40 @@
+<div id="monchat">
+    <h1>Monitoring Chat</h1>
+    <input id="userid" type="text" name="userid">
+    <input id="setname" type="button" value="SetName"/>
+    <select id="room">
+        <option value="main" selected="selected">main</option>
+        <option value="disturbia">disturbia</option>
+    </select>
+    <br>
+    <input id="message" type="text" name="message">
+    <input id="button" type="button" value="Send"/>
+    <hr>
+    <br>
+    <div id="msgbox">
+        <table id="chatbox">
+            <tbody>
+            <tr><td>Chat goes here!</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div id="statbox">
+    <table id="messages">
+        <tbody>
+        <tr><td>WARNING:</td></tr>
+        </tbody>
+    </table>
+</div>
+
+
+<link rel="stylesheet" type="text/css" href="/page.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/moment.js"></script>
+<script src="/client.js"></script>
+
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
