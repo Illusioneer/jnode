@@ -8,7 +8,9 @@ var express = require('express')
 
 var app = express();
 
-console.log(db.updatestats);
+var db = require('./db');
+var rez = db.updatestats();
+console.log("Test: "+ rez[1]);
 
 // all environments
 app.set('port', process.env.PORT || 3000);
