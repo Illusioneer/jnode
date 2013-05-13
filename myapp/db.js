@@ -9,7 +9,5 @@ exports.updatestats = function() {
         var nowtime =  moment().format('YYYY-MM-DD h:mm');
         var thesql = "SELECT * FROM servicestatuses WHERE nagiostimeid >= '" + starttime + "' AND nagiostimeid < '" + nowtime + "' AND current_state >= 1 AND current_state < 8"
         var query = client.query(thesql);
-        query.on('row', function(row) {
-            return JSON.parse("{" + row.servicedata.replace(/\=\>/g,":").replace(/NULL/g,'"NULL"') + "}");
-        });
+        query.on('row', function(row) {console.log(row.servicedata)});
     }
