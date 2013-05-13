@@ -8,5 +8,6 @@ exports.list = function(req, res){
 };
 
 exports.node = function(req, res){
+
     res.render('node', { title: 'node List', datum: req.params, layout: true });
 };
