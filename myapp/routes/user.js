@@ -8,6 +8,7 @@ exports.list = function(req, res){
 };
 
 exports.node = function(req, res){
-    var db = require('../db')
-    res.render('node', { title: 'node List', datum: req.params, serv: db.updatestats(), layout: true });
+    var db = require('../db');
+    var rez = db.updatestats();
+    res.render('node', { title: 'node List', datum: req.params, serv: rez[1], layout: true });
 };
