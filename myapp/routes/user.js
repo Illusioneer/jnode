@@ -9,6 +9,5 @@ exports.list = function(req, res){
 
 exports.node = function(req, res){
     var db = require('../db');
-    var rez = db.updatestats();
-    res.render('node', { title: 'node List', datum: req.params, serv: rez[1], layout: true });
+    db.updatestats(5, res.render('node', { title: 'node List', datum: req.params, serv: rowset, layout: true }));
 };

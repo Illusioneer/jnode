@@ -2,15 +2,10 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , http = require('http')
-  , path = require('path')
-  , db = require('./db');
+  , path = require('path');
 
 
 var app = express();
-
-var db = require('./db');
-var rez = db.updatestats();
-console.log("Test: "+ rez[1]);
 
 // all environments
 app.set('port', process.env.PORT || 3000);
