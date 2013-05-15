@@ -8,7 +8,7 @@ exports.list = function(req, res){
 };
 
 exports.node = function(req, res){
-
+    console.time("nodeview");
     var starttime = moment().subtract('minutes', 5).format('YYYY-MM-DD h:mm');
     var nowtime =  moment().format('YYYY-MM-DD h:mm');
     var thesql = "SELECT * FROM servicestatuses WHERE nagiostimeid >= '" + starttime + "' AND nagiostimeid < '" + nowtime + "' AND current_state >= 1 AND current_state < 8";
@@ -16,6 +16,6 @@ exports.node = function(req, res){
     client.query(thesql, function(err, result) {
         res.render('node', {title: 'node List', datum: result, layout: true});
     });
-
+    console.endtime("nodeview");
 };
 
