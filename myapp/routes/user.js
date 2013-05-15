@@ -1,3 +1,8 @@
+var moment = require('moment');
+var pg = require('pg');
+var client = new pg.Client('postgres://master1:harper123@localhost:5432/mastercontrol');
+client.connect();
+
 exports.list = function(req, res){
   res.render('user', { title: 'User List' + req.params.name, layout: true });
 };

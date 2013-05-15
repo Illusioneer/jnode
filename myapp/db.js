@@ -10,8 +10,6 @@ exports.updatestats = function(minutes) {
 
         var query = client.query(thesql);
 
-        query.on('row', function(row) {
-            rowset.push(JSON.parse("{" + row.servicedata.replace(/\=\>/g,":").replace(/NULL/g,'"NULL"') + "}"));
-        });
+        query.on('row', function(row) {rowset.push(JSON.parse("{" + row.servicedata.replace(/\=\>/g,":").replace(/NULL/g,'"NULL"') + "}"));});
         return rowset;
      }
