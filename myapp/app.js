@@ -4,6 +4,10 @@ var express = require('express')
   , http = require('http')
   , path = require('path');
 
+var moment = require('moment');
+var pg = require('pg');
+var client = new pg.Client('postgres://master1:harper123@localhost:5432/mastercontrol');
+client.connect();
 
 var app = express();
 
