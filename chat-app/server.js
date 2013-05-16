@@ -1,14 +1,15 @@
 var express = require('express');
-var app = express();
 var socket = require('socket.io');
-
 var moment = require('moment');
 var pg = require('pg');
 var client = new pg.Client('postgres://master1:harper123@localhost:5432/mastercontrol');
+var StatsD = require('node-statsd').StatsD,
+
 client.connect();
 
-var StatsD = require('node-statsd').StatsD,
-    stats = new StatsD({host:'dropbox.hcpprod.com'});
+stats = new StatsD({host:'dropbox.hcpprod.com'});
+
+var app = express();
 
 app.configure(function(){
     app.use(express.static(__dirname + '/'));
