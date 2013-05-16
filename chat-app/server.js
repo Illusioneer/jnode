@@ -1,9 +1,9 @@
-var express = require('express');
-var socket = require('socket.io');
-var moment = require('moment');
-var pg = require('pg');
-var client = new pg.Client('postgres://master1:harper123@localhost:5432/mastercontrol');
-var StatsD = require('node-statsd').StatsD,
+var express = require('express'),
+socket = require('socket.io'),
+moment = require('moment'),
+pg = require('pg'),
+client = new pg.Client('postgres://master1:harper123@localhost:5432/mastercontrol'),
+StatsD = require('node-statsd').StatsD;
 
 client.connect();
 
