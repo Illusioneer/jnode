@@ -1,9 +1,9 @@
 var express = require('express'),
-socket = require('socket.io'),
-moment = require('moment'),
-pg = require('pg'),
-client = new pg.Client('postgres://master1:harper123@localhost:5432/mastercontrol'),
-StatsD = require('node-statsd').StatsD;
+    socket = require('socket.io'),
+    moment = require('moment'),
+    pg = require('pg'),
+    client = new pg.Client('postgres://master1:harper123@localhost:5432/mastercontrol'),
+    StatsD = require('node-statsd').StatsD;
 
 client.connect();
 
@@ -24,14 +24,14 @@ io.sockets.on('connection', function (socket) {
         console.log("disconnect");
     });
 
-    socket.emit("pong",{txt:"Connected to server"});
+    socket.emit("pong",{uid:"MCP",msg:"Connected to server"});
     socket.on('ping', function (data) {
         console.log("Logging: " + data.uid + " : " + data.msg);
-        socket.broadcast.to(data.chat).emit("pong",{txt:data.uid + " : " +data.msg});
+        socket.broadcast.to('main').emit("pong",{uid:data.uid, msg:data.msg});
     });
     socket.on('login', function (data) {
         console.log("User: " + data.uid + " : " + data.msg + data.chat);
-        socket.broadcast.to(data.chat).emit("pong",{txt:data.uid + " : " +data.msg  + data.chat});
+        socket.broadcast.to(data.chat).emit("pong",{uid:"MCP", msg: data.uid + " has logged in."});
         socket.join(data.chat);
     });
 
@@ -48,6 +48,7 @@ io.sockets.on('connection', function (socket) {
         });
         var timeOff = new Date().getTime();
         stats.timing('query_response_time', timeOn-timeOff);
+        console.log("FIRING NOW: " + (timeOn-timeOff) + "ms");
     });
 
 });
