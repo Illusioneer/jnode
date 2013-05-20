@@ -4,7 +4,7 @@ var client = new pg.Client('postgres://master1:harper123@localhost:5432/masterco
 client.connect();
 
 exports.list = function(req, res){
-  res.render('user', { title: 'User List' + req.params.name, layout: true });
+    res.render('user', { title: 'User List' + req.params.name ? req.params.name : "Some nobody.", layout: true });
 };
 
 exports.node = function(req, res){
