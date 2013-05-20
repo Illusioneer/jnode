@@ -5,6 +5,8 @@ var express = require('express'),
     client = new pg.Client('postgres://master1:harper123@localhost:5432/mastercontrol'),
     StatsD = require('node-statsd').StatsD;
 
+var entries = require('./socks/entries');
+
 client.connect();
 
 stats = new StatsD({host:'dropbox.hcpprod.com'});
@@ -34,6 +36,8 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.to(data.chat).emit("pong",{uid:"MCP", msg: data.uid + " has logged in."});
         socket.join(data.chat);
     });
+
+    socket.on('entryping', entries.entryping(data))
 
     socket.on('updatestats', function (data) {
         var timeOn = new Date().getTime();
