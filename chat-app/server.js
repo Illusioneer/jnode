@@ -39,7 +39,7 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('entryping', function(data){
         console.log("User: " + data.uid + " has deleted ID " + data.statid);
-        socket.broadcast.to(data.chat).emit("pong",{uid:"MCP", msg: data.uid + " has logged in."});
+        socket.broadcast.to(data.chat).emit("pong",{uid: data.uid, statid: data.statid});
     });
 
     socket.on('updatestats', function (data) {

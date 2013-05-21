@@ -31,7 +31,7 @@ socket.on("statupdate",function(data){
 });
 
 socket.on("entrypong",function(data){
-    $("#"+data.statrow).remove();
+    $(data.statid).remove().fadeOut('fast');
     console.log("The row: " + data.statrow +" was deleted by " + data.statuser);
     $("<div class='chatrow'><div class='userpane'><div class='userpic'></div><div class='userinfo'>MCP</div><div class='usertime'>"+moment().format('h:mm:ss a')+"</div></div><div class='contentpane userchat'>"+data.uid+": has removed incident #" + data.statid +"</div></div>").appendTo("#chatbox");
 })
