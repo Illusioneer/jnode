@@ -37,7 +37,10 @@ io.sockets.on('connection', function (socket) {
         socket.join(data.chat);
     });
 
-    socket.on('entryping', entries.entryping(data))
+    socket.on('entryping', function(data){
+        console.log("User: " + data.uid + " has deleted ID " + data.statid);
+        socket.broadcast.to(data.chat).emit("pong",{uid:"MCP", msg: data.uid + " has logged in."});
+    });
 
     socket.on('updatestats', function (data) {
         var timeOn = new Date().getTime();

@@ -33,7 +33,7 @@ socket.on("statupdate",function(data){
 socket.on("entrypong",function(data){
     $("#"+data.statrow).remove();
     console.log("The row: " + data.statrow +" was deleted by " + data.statuser);
-    $("<div class='chatrow'><div class='userpane'><div class='userpic'></div><div class='userinfo'>MCP</div><div class='usertime'>"+moment().format('h:mm:ss a')+"</div></div><div class='contentpane userchat'>"+data.uid+": has removed incident #" + data.statrow +"</div></div>").appendTo("#chatbox");
+    $("<div class='chatrow'><div class='userpane'><div class='userpic'></div><div class='userinfo'>MCP</div><div class='usertime'>"+moment().format('h:mm:ss a')+"</div></div><div class='contentpane userchat'>"+data.uid+": has removed incident #" + data.statid +"</div></div>").appendTo("#chatbox");
 })
 
 $("#setname").click(function(){
@@ -53,7 +53,7 @@ function newProblem(rowentry, statid){
     $(rowentry).appendTo("#alerts").children().find(".ackdelete").bind('click', function() {
         console.log("You" + $("#userid").val() +" have clicked element" + statid);
         $(this).closest(".alertrow").remove();
-        socket.emit("entryping",{statrow:statid, statuser:$("#userid").val()});
+        socket.emit("entryping",{statid:statid, uid:$("#userid").val()});
     });
 };
 
