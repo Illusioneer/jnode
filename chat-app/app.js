@@ -23,7 +23,7 @@ socket.on("statupdate",function(data){
             break;
     }
 
-    var ackdiv = '<div class="ackpane"><div class="ackuser">Bo Bob</div><div class="ackdelete">Del</div><div class="acknoticed">Ack</div></div>';
+    var ackdiv = '<div class="ackpane"><div class="ackuser"></div><div class="ackdelete">Del</div><div class="acknoticed">Ack</div></div>';
     var rowentry = "<div id='"+ data.stats.current_problem_id + "' class='alertrow "+ rowclass +"'>"+ ackdiv +"<div class='alerthost'>"+data.stats.host_name+"</div><div class='alerttime'>"+Date(data.stats.last_check*1000)+"</div><div class='alertmessage'>"+data.stats.plugin_output+"</div>";
     console.log(data.stats);
     $("'#"+data.stats.current_problem_id+"'").length ? newProblem(rowentry, data.stats.current_problem_id) : oldProblem(rowentry,data.stats.current_problem_id);
