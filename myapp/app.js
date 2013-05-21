@@ -29,6 +29,10 @@ app.get('/users/:name', user.list);
 app.get('/nodes/*', user.node);
 app.get('/post', post.new);
 
+app.post('/post', function(req,res){
+    console.log(req.body.user);
+});
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
