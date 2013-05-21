@@ -1,8 +1,4 @@
 
-/*
- * GET home page.
- */
-
-exports.post = function(req, res){
-    res.render('index', { title: 'Posting' });
+exports.new = function(req, res){
+    res.render('newpost', { title: 'Posting' });
 };
