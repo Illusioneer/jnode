@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title><%= title %></title>
-    </head>
-   <body>
-          <h1><%= title %></h1>
-          <p>Welcome to the posting page</p>
-    </body>
- </html>
+    <html>
+        <head>
+            <title><%= title %></title>
+            </head>
+                <body>
+                    <h1><%= title %></h1>
+                        <p>Welcome to the posting page</p>
+
+                        <h1>A Simple Form</h1>
+                        <p>Leave the field empty and submit the form to see what happens.</p>
+
+                        <form>
+
+                            <label for="name">Author</label><input type="text" name="post[author]" ></input><br>
+                            <label for="name">Title</label><input type="text" name="post[title]" ></input><br>
+                                <label for="name">Content
+                                    <textarea rows="4" cols="50" name="post[body]">
+                                    At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+                                    </textarea>
+                                    <br><input type="submit" value="Submit">
+                                    </form>
+                                    </body>
+                                </html>

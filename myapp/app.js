@@ -30,7 +30,8 @@ app.get('/nodes/*', user.node);
 app.get('/post', post.new);
 
 app.post('/post', function(req,res){
-    console.log(req.body.user);
+    console.log(req.body.post.body);
+    console.log(req.body.post.title);
 });
 
 http.createServer(app).listen(app.get('port'), function(){
