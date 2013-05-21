@@ -5,14 +5,10 @@ var express = require('express'),
     client = new pg.Client('postgres://master1:harper123@localhost:5432/mastercontrol'),
     StatsD = require('node-statsd').StatsD;
 
-var entries = require('./socks/entries');
-
 client.connect();
-
 stats = new StatsD({host:'dropbox.hcpprod.com'});
 
 var app = express();
-
 app.configure(function(){
     app.use(express.static(__dirname + '/'));
 });
@@ -37,7 +33,10 @@ io.sockets.on('connection', function (socket) {
         socket.join(data.chat);
     });
 
-    socket.on('entryping', entrydelete(data));
+    socket.on('entryping', (data) {
+        console.log("User: " + data.uid + " has deleted ID " + data.statid);
+        socket.broadcast.to(data.chat).emit("entrypong",{uid: data.uid, statid: data.statid});
+    });
 
     socket.on('updatestats', function (data) {
         var timeOn = new Date().getTime();
@@ -56,8 +55,3 @@ io.sockets.on('connection', function (socket) {
     });
 
 });
-
-function entrydelete(data){
-    console.log("User: " + data.uid + " has deleted ID " + data.statid);
-    socket.broadcast.to(data.chat).emit("entrypong",{uid: data.uid, statid: data.statid});
-}
