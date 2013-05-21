@@ -33,14 +33,14 @@ socket.on("statupdate",function(data){
 socket.on("entrypong",function(data){
     $("#"+data.statrow).remove();
     console.log("The row: " + data.statrow +" was deleted by " + data.statuser);
-    $("<tr class='information'><td>"+data.statuser+": has removed incident #" + data.statrow +"</td></tr>").appendTo("#chatbox > tbody");
+    $("<div class='chatrow'><div class='userpane'><div class='userpic'></div><div class='userinfo'>MCP</div><div class='usertime'>"+moment().format('h:mm:ss a')+"</div></div><div class='contentpane userchat'>"+data.uid+": has removed incident #" + data.statrow +"</div></div>").appendTo("#chatbox");
 })
 
 $("#setname").click(function(){
     $("#userid").prop('disabled', true);
     socket.emit("login",{uid:$("#userid").val(), msg: " has logged in to " , chat:$("#room").val()});
     $("#room").prop('disabled', true);
-})
+});
 
 $("#button").click(function(){
     socket.emit("ping",{msg:$("#message").val(), uid:$("#userid").val(),chat:$("#room").val()});
@@ -62,7 +62,7 @@ function oldProblem(rowentry,statid) {
     $(rowentry).appendTo("#alerts").children().find(".ackdelete").bind('click', function() {
         console.log("You" + $("#userid").val() +" have clicked element" + statid);
         $(this).closest(".alertrow").remove();
-        socket.emit("entryping",{statrow:statid, statuser:$("#userid").val()});
+        socket.emit("entryping",{statid:statid, uid:$("#userid").val()});
     });
 };
 
