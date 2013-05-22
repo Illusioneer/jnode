@@ -8,11 +8,9 @@ exports.new = function(req, res){
 };
 
 exports.submit = function(req,res){
-    datum = [Date(),req.body.post.title, req.body.post.content, req.body.post.desc,0,'localhost'];
+    var now = new Date() - 1;
+    datum = [now,req.body.post.title, req.body.post.content, req.body.post.desc,0,'localhost'];
     client.query("INSERT INTO nodeposts(create_stamp, post_name, post_content,post_desc,author,host_name) values(to_timestamp($1), $2, $3, $4, $5, $6)", datum);
-
-    console.log("TITLE: "+title);
+    console.log("TITLE: "+datum);
+    res.redirect('/post');
 }
-
-exports.submit = function(req, res){
-};

@@ -3,6 +3,7 @@ var express = require('express')
   , user = require('./routes/user')
   , post = require('./routes/post')
   , http = require('http')
+  , feed = require('./routes/feed')
   , path = require('path');
 
 var app = express();
@@ -28,6 +29,7 @@ app.get('/', routes.index);
 app.get('/users/:name', user.list);
 app.get('/nodes/*', user.node);
 app.get('/post', post.new);
+app.get('/rss', feed.main)
 
 app.post('/post', post.submit);
 
