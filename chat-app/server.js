@@ -50,8 +50,9 @@ io.sockets.on('connection', function (socket) {
             socket.broadcast.to('main').emit("statupdate",{stats:response});
         });
         var timeOff = new Date().getTime();
-        stats.timing('query_response_time', timeOn-timeOff);
-        console.log("FIRING NOW: " + (timeOn-timeOff) + "ms");
+        var timeDiff = timeOff-timeOn
+        stats.timing('query_response_time', timeDiff);
+        console.log("Processing Time Needed: " + timeDiff + "ms");
     });
 
 });
