@@ -47,4 +47,4 @@ exports.main = function(req, res){
             res.send(feed.render('rss-2.0'));
         }
     });
-});
+};
