@@ -1,6 +1,6 @@
 var nodemailer = require("nodemailer");
 
-var transport = nodemailer.createTransport("SMTP", {
+var smtpTransport = nodemailer.createTransport("SMTP", {
     host: "localhost", // hostname
     secureConnection: false, // use SSL
     port: 25 // port for secure SMTP
@@ -15,6 +15,3 @@ exports.send = function(maildata){
         }
     });
 };
-
-
-

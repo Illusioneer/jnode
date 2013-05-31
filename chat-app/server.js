@@ -4,8 +4,8 @@ var express = require('express'),
     pg = require('pg'),
     client = new pg.Client('postgres://master1:harper123@localhost:5432/mastercontrol'),
     StatsD = require('node-statsd').StatsD;
-
 client.connect();
+
 stats = new StatsD({host:'dropbox.hcpprod.com'});
 
 var app = express();
@@ -43,12 +43,15 @@ io.sockets.on('connection', function (socket) {
         console.time('sqlperftest')
         var starttime = moment().subtract('minutes', 5).format('YYYY-MM-DD h:mm');
         var nowtime =  moment().format('YYYY-MM-DD h:mm');
-        var thesql = "SELECT * FROM servicestatuses WHERE nagiostimeid >= '" + starttime + "' AND nagiostimeid < '" + nowtime + "' AND current_state >= 1 AND current_state < 8"
-        var query = client.query(thesql);
-        query.on('row', function(row) {
-            var response = JSON.parse("{" + row.servicedata.replace(/\=\>/g,":").replace(/NULL/g,'"NULL"') + "}")
-            socket.broadcast.to('main').emit("statupdate",{stats:response});
+        var thesql = "SELECT * FROM servicestatuses WHERE nagiostimeid >= '" + starttime + "' AND nagiostimeid < '" + nowtime + "' AND current_state >= 1 AND current_state < 8";
+        client.query(thesql, function(err, result){
+            stats.timing('current_alerts', result.rows.length);
+            for (row in result.rows){
+              var response = JSON.parse("{" + result.rows[row].servicedata.replace(/\=\>/g,":").replace(/NULL/g,'"NULL"') + "}");
+              socket.broadcast.to('main').emit("statupdate",{stats:response});
+            }
         });
+
         var timeOff = new Date().getTime();
         var timeDiff = timeOff-timeOn
         stats.timing('query_response_time', timeDiff);
