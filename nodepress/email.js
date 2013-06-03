@@ -6,12 +6,6 @@ var transport = nodemailer.createTransport("SMTP", {
     port: 25 // port for secure SMTP
 });
 
-//var maildata = {
-//    from: "Your Host <root@localhost.com>", // sender address
-//    to: "Bryan <bryan.owens@harpercollins.com>", // comma separated list of receivers
-//    subject: "Hello", // Subject line
-//    text: "Hello world" // plaintext body
-//}
 
 exports.send = smtpTransport.sendMail(maildata, function(error, response){
     if(error){
