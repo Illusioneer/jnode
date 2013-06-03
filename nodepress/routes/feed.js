@@ -21,6 +21,7 @@ exports.rss = function(req, res){
         }
     });
 
+
     // Function requesting the last 5 posts to a database. This is just an
     // example, use the way you prefer to get your posts.
 
