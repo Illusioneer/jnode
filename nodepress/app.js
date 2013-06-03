@@ -2,7 +2,7 @@ var express = require('express')
   , routes = require('./routes')
   , user = require('./routes/user')
   , feed = require('./routes/feed')
-  , post = require('./routes/post')
+  , post = require('./routes/posts')
   , http = require('http')
   , path = require('path');
 
