@@ -6,14 +6,12 @@ var smtpTransport = nodemailer.createTransport("SMTP", {
     port: 25 // port for secure SMTP
 });
 
-
-exports.send = smtpTransport.sendMail(maildata, function(error, response){
-    if(error){
-        console.log(error);
-    }else{
-        console.log("Message sent: " + response.message);
-    }
-});
-
-
-
+exports.send = function(maildata){
+    smtpTransport.sendMail(maildata, function(error, response){
+        if(error){
+            console.log(error);
+        }else{
+            console.log("Message sent: " + response.message);
+        }
+    });
+};

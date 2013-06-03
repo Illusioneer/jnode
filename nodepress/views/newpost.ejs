@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <title><%= title %></title>
+            </head>
+                <body>
+                    <h1><%= title %></h1>
+                        <p>Welcome to the submission page</p>
+
+                        <h1>A Simple Form</h1>
+                        <p>Leave the field empty and submit the form to see what happens.</p>
+
+                        <form id="submit_post" action="post" method="post" >
+                            <label>Title</label><input type="text" name="post[title]" ></input><br>
+                            <label>Description</label><input type="text" name="post[desc]" ></input><br>
+                                <label>Content</label><textarea rows="4" cols="50" name="post[content]"> </textarea><br>
+                                    <input type="submit" value="Submit">
+                                    </form>
+                                </body>
+                            </html>

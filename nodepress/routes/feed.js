@@ -35,10 +35,10 @@ exports.rss = function(req, res){
         else {
             for(var key in posts) {
                 feed.item({
-                    title:          posts[key].post_name,
+                    title:          posts.rows[key].post_name,
                     link:           "http://mcp.hcpprod.com:3000/posts",
-                    description:    posts[key].desc,
-                    date:           posts[key].create_stamp
+                    description:    posts.rows[key].desc,
+                    date:           posts.rows[key].create_stamp
                 });
             }
             // Setting the appropriate Content-Type
