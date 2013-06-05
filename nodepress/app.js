@@ -27,7 +27,7 @@ if ('development' == app.get('env')) {
 }
 
 app.get('/', routes.index);
-app.get('/users', user.list);
+app.get('/users/:name', user.list);
 
 app.get('/rss', feed.rss);
 
