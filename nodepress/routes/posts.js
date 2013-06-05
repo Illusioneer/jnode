@@ -25,5 +25,5 @@ exports.submit = function(req,res){
 
     email.send(maildata);
 
-    res.redirect('/post');
+    res.redirect('/');
 }
