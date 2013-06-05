@@ -4,6 +4,29 @@
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
+    <script type="text/javascript" src="http://www.designchemical.com/blog/wp-content/themes/dc2011/js/jquery.premium.plugins.js"></script>
+    <script type="text/javascript" src="http://www.designchemical.com/blog/wp-content/themes/dc2011/js/jquery.premium.site.js"></script>
+    <script type="text/javascript" src="http://www.designchemical.com/blog/wp-content/themes/dc2011/dcsns/js/jquery.social.stream.1.5.js"></script>
+
+    <script type="text/javascript">
+    $('#social-stream-2').dcSocialStream({
+        feeds: {
+        twitter: {
+        id: 'designchemical,envato',
+        thumb: true
+        }
+    },
+    height: 540,
+    filter: false,
+    controls: false,
+    rotate: {
+        delay: 5000,
+        direction: 'down'
+        }
+    });
+    </script>
+
+
   <body>
     <h1><%= title %></h1><br>
     <%for (row in posts.rows){%>
