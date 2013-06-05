@@ -9,7 +9,7 @@ exports.index = function(req, res){
     var thesql = "SELECT * FROM nodeposts LIMIT 10;";
 
     client.query(thesql, function(err, result) {
-        res.render('user', { title: 'Entry List', posts: result, layout: true });
+        res.render('index', { title: 'Entry List', posts: result, layout: true });
     });
 };
 
