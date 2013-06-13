@@ -7,6 +7,10 @@ exports.list = function(req, res){
     res.render('user', { title: 'User List', layout: true });
 };
 
+exports.backbone = function(req, res) {
+	res.render('jason', { title: 'Test Backbone Page', layout: true });
+}
+
 exports.jason = function(req, res){
     var thesql = "SELECT * FROM nodeposts ORDER BY create_stamp DESC";
 

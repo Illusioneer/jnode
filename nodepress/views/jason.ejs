@@ -1,0 +1,37 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+<script src="http://documentcloud.github.io/underscore/underscore-min.js"></script>
+<script src="http://documentcloud.github.io/backbone/backbone-min.js"></script>
+
+<script>
+Status = Backbone.Model.extend();
+
+StatusList = Backbone.Collection.extend({
+  model: Status,
+  value: null,
+  url: function(){ return "jason";
+});
+
+AppView = Backbone.View.extend({
+  el: $("body"),
+  initialize: function () {
+    _.bindAll(this, "render");// to solve the this issue
+    this.status = new StatusList( null, { view: this });
+    this.status.bind("refresh", this.render);
+  },
+  events: {
+    "click #updateStatus":  "getStatus",
+  },
+  getStatus: function () {
+    this.status.value =  $("#statusBar").val();
+    this.status.fetch()
+  },
+  render: function () {
+    var statusEl = $("#status")
+    this.status.each( function(model){
+      statusEl.prepend("<div>" + model.get('status') + "</div>");
+    }
+  }
+});
+
+
+</script>
