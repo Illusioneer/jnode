@@ -18,7 +18,7 @@ exports.jason = function(req, res){
             res.send('404 Not found', 404);
 
         else {
-            res.send(JSON.stringify(posts))
+            res.send(JSON.stringify(posts.rows))
         }
     });
 
