@@ -1,0 +1,19 @@
+.sizeone {
+  font-size: 20pt;
+  border-style:solid;
+  border-width:2px;
+  border-color: red;
+  background: lightblue;
+  margin: 8px;
+  width: 200px;
+  height: 100px;
+  display:inline-block;
+
+}
+
+.container {
+  border-style:solid;
+  border-width:2px;
+  border-color: blue;
+}
+

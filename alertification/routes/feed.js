@@ -4,7 +4,7 @@ var client = new pg.Client('postgres://master1:harper123@localhost:5432/masterco
 client.connect();
 var Feed = require('feed');
 
-exports.rss = function(req, res){
+exports.main = function(req, res){
 
     // Initializing feed object
     var feed = new Feed({
@@ -21,6 +21,9 @@ exports.rss = function(req, res){
         }
     });
 
+    // Function requesting the last 5 posts to a database. This is just an
+    // example, use the way you prefer to get your posts.
+
     var thesql = "SELECT * FROM nodeposts ORDER BY create_stamp DESC";
 
     client.query(thesql, function (err, posts){
@@ -31,10 +34,10 @@ exports.rss = function(req, res){
         else {
             for(var key in posts) {
                 feed.item({
-                    title:          posts.rows[key].post_name,
+                    title:          posts[key].post_name,
                     link:           "http://mcp.hcpprod.com:3000/posts",
-                    description:    posts.rows[key].desc,
-                    date:           posts.rows[key].create_stamp
+                    description:    posts[key].desc,
+                    date:           posts[key].create_stamp
                 });
             }
             // Setting the appropriate Content-Type
@@ -45,3 +48,4 @@ exports.rss = function(req, res){
         }
     });
 };
+

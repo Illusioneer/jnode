@@ -1,6 +1,6 @@
-//open db connection
 var moment = require('moment');
 var pg = require('pg');
+var url = require('url');
 var client = new pg.Client('postgres://master1:harper123@localhost:5432/mastercontrol');
 client.connect();
 var email = require('../email');
@@ -27,3 +27,28 @@ exports.submit = function(req,res){
 
     res.redirect('/');
 }
+
+exports.post = function(req, res) {
+        var querystring = "WHERE ";
+        for (param in req.query) {
+				var andy++
+				if (andy > 0 ) {queryand == " AND "};
+                querystring = querystring + queryand + param + " = '"+ req.query[param] + "'"
+        };
+
+    var thesql = "SELECT * FROM nodeposts " + querystring + " ORDER BY create_stamp DESC";
+        console.log("QUERY: " + thesql);
+    res.contentType('application/json');
+
+    client.query(thesql, function (err, posts){
+
+        if(err)
+            res.send('404 Not found', 404);
+
+        else {
+            res.send(JSON.stringify(posts.rows))
+        }
+    });
+
+
+};
