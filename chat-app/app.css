@@ -1,6 +1,7 @@
 #monchat {
     width: 650px;
     height: 800px;
+
 }
 
 #chatwindow{
@@ -47,6 +48,18 @@
 .warning { background-color: lightyellow; }
 .critical { background-color: red; }
 
+#userlist:nth-child(odd) {
+  border: solid 1px black;
+  min-width:80px;
+  width: 80px;
+  font-family: verdana;
+  font-size: 10pt;
+}
+
+.listname:nth-child(odd) {
+  background:lightblue;
+  min-width: 79px;
+}
 
 .userpane {
     min-width:100px;

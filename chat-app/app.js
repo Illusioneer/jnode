@@ -2,6 +2,7 @@ var socket = io.connect('http://mcp.hcpprod.com:9090');
 
 socket.on("pong",function(data){
     console.log(data);
+    console.log("LIST: "+data.list);
     $("<div class='chatrow'><div class='userpane'><div class='userpic'></div><div class='userinfo'>"+data.uid+"</div><div class='usertime'>"+moment().format('h:mm:ss a')+"</div></div><div class='contentpane userchat'>"+data.msg+"</div></div>").appendTo("#chatbox");
 });
 

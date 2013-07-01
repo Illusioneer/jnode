@@ -6,3 +6,30 @@
 Threshold:
 Time Range
 Change/Limit of a metric
+# times limit is hit
+
+
+
+#General
+Created Date
+Created By
+Details
+
+
+#Window
+Open/Endless
+Expire date
+Repeat Window
+
+#Conditions
+Value exceeds/drops-below
+MORE THAN (number of times)
+IN A TIME WINDOW OF (x minutes)
+
+#Actions
+--email (dropdown list)
+--text (dropdown list)
+--send notification to dashboard
+
+#History
+Events written to log

@@ -15,11 +15,13 @@ app.configure(function(){
 
 var server = app.listen(9090);
 var io = socket.listen(server);
+var users = []
 
 io.sockets.on('connection', function (socket) {
 
     socket.on('disconnect', function (socket) {
-        console.log("disconnect");
+        console.log("Disconnected: " + socket.username);
+        users.splice(users.indexOf(socket.username),1);
     });
 
     socket.emit("pong",{uid:"MCP",msg:"Connected to server"});
@@ -29,8 +31,10 @@ io.sockets.on('connection', function (socket) {
     });
     socket.on('login', function (data) {
         console.log("User: " + data.uid + " : " + data.msg + data.chat);
-        socket.broadcast.to(data.chat).emit("pong",{uid:"MCP", msg: data.uid + " has logged in."});
+        socket.broadcast.to(data.chat).emit("pong",{uid:"MCP", msg: data.uid + " has logged in.",list:users});
         socket.join(data.chat);
+        socket.username = data.uid;
+        console.log("Current users: " + users);
     });
 
     socket.on('entryping', function (data) {
@@ -53,7 +57,7 @@ io.sockets.on('connection', function (socket) {
         });
 
         var timeOff = new Date().getTime();
-        var timeDiff = timeOff-timeOn
+        var timeDiff = timeOff-timeOn;
         stats.timing('query_response_time', timeDiff);
         console.log("Processing Time Needed: " + timeDiff + "ms");
     });
