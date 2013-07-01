@@ -30,11 +30,17 @@ io.sockets.on('connection', function (socket) {
         socket.broadcast.to('main').emit("pong",{uid:data.uid, msg:data.msg});
     });
     socket.on('login', function (data) {
+        users.push(data.uid);
         console.log("User: " + data.uid + " : " + data.msg + data.chat);
         socket.broadcast.to(data.chat).emit("pong",{uid:"MCP", msg: data.uid + " has logged in.",list:users});
         socket.join(data.chat);
         socket.username = data.uid;
         console.log("Current users: " + users);
+    });
+
+    socket.on('terminated', function(data){
+        console.log("Disconnected: " + data.uid);
+        users.splice(users.indexOf(socket.uid),1);
     });
 
     socket.on('entryping', function (data) {

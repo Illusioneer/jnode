@@ -6,6 +6,10 @@ socket.on("pong",function(data){
     $("<div class='chatrow'><div class='userpane'><div class='userpic'></div><div class='userinfo'>"+data.uid+"</div><div class='usertime'>"+moment().format('h:mm:ss a')+"</div></div><div class='contentpane userchat'>"+data.msg+"</div></div>").appendTo("#chatbox");
 });
 
+window.onbeforeunload = function(){
+
+}
+
 socket.on("statupdate",function(data){
 
     switch (parseInt(data.stats.current_state))
@@ -28,7 +32,6 @@ socket.on("statupdate",function(data){
     var rowentry = "<div id='"+ data.stats.current_problem_id + "' class='alertrow "+ rowclass +"'>"+ ackdiv +"<div class='alerthost'>"+data.stats.host_name+"</div><div class='alerttime'>"+Date(data.stats.last_check*1000)+"</div><div class='alertmessage'>"+data.stats.plugin_output+"</div>";
     console.log(data.stats);
     $("'#"+data.stats.current_problem_id+"'").length ? newProblem(rowentry, data.stats.current_problem_id) : oldProblem(rowentry,data.stats.current_problem_id);
-
 });
 
 socket.on("entrypong",function(data){
@@ -40,6 +43,9 @@ socket.on("entrypong",function(data){
 $("#setname").click(function(){
     $("#userid").prop('disabled', true);
     socket.emit("login",{uid:$("#userid").val(), msg: " has logged in to " , chat:$("#room").val()});
+    window.addEventListener("beforeunload", function(e){
+        socket.emit("terminated",{uid:$("#userid").val()});
+    }, false);
     $("#room").prop('disabled', true);
 });
 
