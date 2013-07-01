@@ -20,8 +20,7 @@ var users = []
 io.sockets.on('connection', function (socket) {
 
     socket.on('disconnect', function (socket) {
-        console.log("Disconnected: " + socket.username);
-        users.splice(users.indexOf(socket.username),1);
+        console.log("Disconnected");
     });
 
     socket.emit("pong",{uid:"MCP",msg:"Connected to server"});
@@ -32,7 +31,7 @@ io.sockets.on('connection', function (socket) {
     socket.on('login', function (data) {
         users.push(data.uid);
         console.log("User: " + data.uid + " : " + data.msg + data.chat);
-        socket.broadcast.to(data.chat).emit("pong",{uid:"MCP", msg: data.uid + " has logged in.",list:users});
+        socket.broadcast.to(data.chat).emit("pong",{uid:"MCP", msg: data.uid + " has logged in.",newuser:data.uid});
         socket.join(data.chat);
         socket.username = data.uid;
         console.log("Current users: " + users);
@@ -40,7 +39,8 @@ io.sockets.on('connection', function (socket) {
 
     socket.on('terminated', function(data){
         console.log("Disconnected: " + data.uid);
-        users.splice(users.indexOf(socket.uid),1);
+        users.splice(users.indexOf(data.uid),1);
+        socket.broadcast.to('main').emit("terminated",{uid:data.uid, msg:"Terminated Connection"});
     });
 
     socket.on('entryping', function (data) {

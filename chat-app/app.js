@@ -1,17 +1,13 @@
 var socket = io.connect('http://mcp.hcpprod.com:9090');
 
 socket.on("pong",function(data){
-    console.log(data);
-    console.log("LIST: "+data.list);
+    if (data.newuser) {
+        console.log(data.newuser + " has logged in")
+    }
     $("<div class='chatrow'><div class='userpane'><div class='userpic'></div><div class='userinfo'>"+data.uid+"</div><div class='usertime'>"+moment().format('h:mm:ss a')+"</div></div><div class='contentpane userchat'>"+data.msg+"</div></div>").appendTo("#chatbox");
 });
 
-window.onbeforeunload = function(){
-
-}
-
 socket.on("statupdate",function(data){
-
     switch (parseInt(data.stats.current_state))
     {
         case 0:
@@ -39,6 +35,10 @@ socket.on("entrypong",function(data){
     console.log("The row: " + data.statid +" was deleted by " + data.uid);
     $("<div class='chatrow'><div class='userpane'><div class='userpic'></div><div class='userinfo'>MCP</div><div class='usertime'>"+moment().format('h:mm:ss a')+"</div></div><div class='contentpane userchat'>"+data.uid+": has removed incident #" + data.statid +"</div></div>").appendTo("#chatbox");
 })
+
+socket.on("terminated", function(data){
+   $('#userlist').children("#"+data.uid).remove();
+});
 
 $("#setname").click(function(){
     $("#userid").prop('disabled', true);
@@ -79,9 +79,4 @@ $(document).ready(function()
     {
         socket.emit("updatestats",{stat:"servicestatuses"});
     }, 30000);
-
-    window.onbeforeunload = function(){
-        socket.emit("disconnect",{user:$("#userid").val()});
-    }
-
 });
