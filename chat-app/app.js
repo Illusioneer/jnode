@@ -4,6 +4,11 @@ socket.on("pong",function(data){
     if (data.newuser) {
         console.log(data.newuser + " has logged in")
         $("#userlist").add("<div id='"+ data.uid +"' class='listname'>"+ data.uid +"</div>")
+    };
+    if (data.userlist) {
+        for (var i = 0; i < data.userlist.length; i++) {
+            $("#userlist").add("<div id='"+ data.userlist[i] +"' class='listname'>"+ data.userlist[i] +"</div>")
+        }
     }
     $("<div class='chatrow'><div class='userpane'><div class='userpic'></div><div class='userinfo'>"+data.uid+"</div><div class='usertime'>"+moment().format('h:mm:ss a')+"</div></div><div class='contentpane userchat'>"+data.msg+"</div></div>").appendTo("#chatbox");
 });

@@ -15,7 +15,7 @@ app.configure(function(){
 
 var server = app.listen(9090);
 var io = socket.listen(server);
-var users = []
+var users = [];
 
 io.sockets.on('connection', function (socket) {
 
@@ -23,7 +23,7 @@ io.sockets.on('connection', function (socket) {
         console.log("Disconnected");
     });
 
-    socket.emit("pong",{uid:"MCP",msg:"Connected to server"});
+    socket.emit("pong",{uid:"MCP",msg:"Connected to server",userlist:users});
     socket.on('ping', function (data) {
         console.log("Logging: " + data.uid + " : " + data.msg);
         socket.broadcast.to('main').emit("pong",{uid:data.uid, msg:data.msg});
@@ -31,9 +31,9 @@ io.sockets.on('connection', function (socket) {
     socket.on('login', function (data) {
         users.push(data.uid);
         console.log("User: " + data.uid + " : " + data.msg + data.chat);
-        socket.broadcast.to(data.chat).emit("pong",{uid:"MCP", msg: data.uid + " has logged in.",newuser:data.uid});
         socket.join(data.chat);
         socket.username = data.uid;
+        socket.broadcast.to(data.chat).emit("pong",{uid:"MCP", msg: data.uid + " has logged in.", userlist:users});
         console.log("Current users: " + users);
     });
 
