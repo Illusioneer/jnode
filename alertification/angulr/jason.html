@@ -2,21 +2,31 @@
 <script type='text/javascript' src="http://code.angularjs.org/angular-1.0.0rc4.min.js"></script>
 <script type='text/javascript' src="http://code.angularjs.org/angular-resource-1.0.0rc4.min.js"></script>
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css">
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/jquery-ui.min.js"></script>
+<script src="http://www.erichynds.com/examples/jquery-ui-multiselect-widget/src/jquery.multiselect.js"></script>
+<link href="http://www.erichynds.com/examples/jquery-ui-multiselect-widget/jquery.multiselect.css" rel="stylesheet" type="text/css" />
+<meta charset=utf-8 />
 <script src="./jason.js"></script>
-
 
 <html ng-app="Graphite">
 <body>
-<div ng-controller="GraphiteCtrl">
-    <form class="form-horizontal">
-        <input type="text" ng-model="searchTerm">
-        <button class="btn" ng-click="doSearch()"><i class="icon-search"></i>Search</button>
-    </form>
-    <table class="table table-striped">
-        <tr ng-repeat="graph in graphiteResult.results">
-            <td>{{graph}}</td>
-        </tr>
-    </table>
-</div>
+    <div ng-controller="GraphiteCtrl">
+        <form class="form-horizontal">
+            <input type="text" ng-model="searchTerm">
+            <button class="btn" ng-click="doSearch()"><i class="icon-search"></i>Search</button>
+        </form>
+        <h1>{{ daFunk }}</h1>
+        <table class="table table-striped">
+            <tr ng-repeat="graph in graphiteResult.datapoints">
+                <a>{{graph[1]}}</a>
+            </tr>
+        </table>
+        <select name="dropdafunk" ng-model="selectedFacilityId">
+            <option ng:repeat="i in graphiteResult.datapoints" value="{{i[0]}}">At {{ i[1] * 1000| date:'yyyy-MM-dd HH:mm:ss Z' }}</option>
+        </select>
+    </div>
 </body>
 </html>
+
