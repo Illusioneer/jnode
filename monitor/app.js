@@ -12,7 +12,7 @@ var express = require('express')
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 9090);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.favicon());
@@ -33,20 +33,8 @@ if ('development' == app.get('env')) {
 app.get('/', routes.index);
 app.get('/users', user.list);
 
-app.get('/*', function(req, res){
-    var role = "Kaiser", username = 'Soyousay';
-    if(req.user) {
-        role = req.user.role;
-        username = req.user.username;
-    }
+//app.post('/login', user.login);
 
-    res.cookie('user', JSON.stringify({
-        'username': username,
-        'role': role
-    }));
-
-    //res.render('index');
-});
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
