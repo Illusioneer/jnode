@@ -10,7 +10,7 @@ client.connect();
 
 exports.list = function(req, res){
     var loggedin = false;
-  res.render('index', { title: 'USER', loggedin: false });;
+  res.render('index', { title: 'USER', loggedin: false });
 };
 
 
@@ -27,10 +27,32 @@ exports.login = function(req,res){
             res.send('404 Not found', 404);
 
         else {
-            res.send(JSON.stringify(posts.rows));
-	    console.log(JSON.stringify(posts.rows));
-	    console.log("I Should be showing data here");
+            console.log(JSON.stringify(posts.rows));
+            console.log("I Should be showing data here");
+            res.cookie('login_token', "blahblahblahblahblah");
+            res.cookie("logininfo", {userid:req.body.login.userid,password:req.body.login.password,loginstamp: Date.now()});
+            console.log("SESSION ID: " + req.session);
+            res.redirect('/');
         }
     });
     res.redirect('/');
 }
+
+exports.logout = function(req,res){
+    res.clearCookie('logininfo');
+    res.redirect('/');
+}
+
+
+
+exports.login = function(req,res){
+    var now = Date.now();
+    console.log("USER LOGGING IN");
+//    var thesql = "SELECT * FROM users WHERE userid = '" + req.body.login.userid + "' AND password = '" + req.body.login.password + "';";
+//    client.query(thesql);
+    console.log("QUERY: " + req.body.login.userid);
+    req.session.cookie.expires = false;
+
+}
+
+

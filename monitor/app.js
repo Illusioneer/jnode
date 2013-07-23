@@ -30,9 +30,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+if (req.cookies.logininfo === 'undefined') {
+    app.get('/*', routes.index);
+}
+
 app.get('/', routes.index);
 app.get('/users', user.list);
-
 app.post('/login', user.login);
 
 

@@ -5,15 +5,20 @@
 
 exports.index = function(req, res){
 
-  if(!res.login) {
-    console.log("Checking for login");
+  //var logincookie = JSON.parse(req.cookies.logininfo);
+
+  if (logincookie = req.cookies.logininfo) {
+      console.log('logininfo exists');
+      if ((Date.now() - logincookie.loginstamp) > 400000 ) {
+          console.log("Your login is stale, deleting it.");
+          res.clearCookie('logininfo');
+      }
+      console.log(Date.now() - logincookie.loginstamp);
   }
 
-  res.cookie('user', JSON.stringify({
-      'username': "KaiserSoso",
-      'role': "Boss",
-      'loginstamp': Date.now()
-  }));
+//    if (req.cookies.logininfo.loginstamp) {console.log("QUERY: " + req.cookies.logininfo.loginstamp)};
 
-  res.render('index', { title: 'Express', loggedin: true });
+  typeof req.cookies.logininfo === 'undefined' ? loggedin = false : loggedin = true;
+  console.log("logged in reads as " + loggedin);
+  res.render('index', { title: 'Express', loggedin: loggedin });
 };
