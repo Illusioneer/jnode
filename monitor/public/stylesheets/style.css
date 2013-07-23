@@ -6,10 +6,15 @@ a {
   color: #00b7ff;
 }
 
-.loginblock {
+.loginblock{
   position: absolute;
   right: 20px;
-  width: 250px;
-  height: 150px;
   top: 20px;
+  width: 200px;
+  height: 150px;
 }
+
+.loggedin{
+  visibility: hidden;
+}
+

@@ -1,8 +1,8 @@
 <div id='login' class='loginblock <%= loggedin != true ? "loggedin" : "notloggedin" %>'    >
-    <form class="form-signin" action="login">
+    <form class="form-signin" action="login" method="post">
         <h4 class="form-signin-heading">Please sign in</h4>
-        <input type="text" class="input-block-level" name="login[userid]" placeholder="User Name">
-        <input type="password" class="input-block-level" name="login[password]" placeholder="Password">
+        <input type="text" class="input-block-level" name="login[userlogin]" placeholder="User Name">
+        <input type="password" class="input-block-level" name="login[userpass]" placeholder="Password">
         <button class="btn btn-large btn-primary" type="submit">Sign in</button>
     </form>
 </div>
