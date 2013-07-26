@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -30,13 +29,11 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-if (req.cookies.logininfo === 'undefined') {
-    app.get('/*', routes.index);
-}
-
 app.get('/', routes.index);
 app.get('/users', user.list);
 app.post('/login', user.login);
+app.get('/submit', user.submit);
+app.get('/retrieve', user.retrieve);
 
 
 http.createServer(app).listen(app.get('port'), function(){
