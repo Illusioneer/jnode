@@ -1,4 +1,4 @@
-<div id='login' class='loginblock <%= loggedin = true ? "loggedin" : "notloggedin" %>'    >
+<div id='login' class='loginblock <%= loggedin == true ? "loggedin" : "notloggedin" %>'    >
     <form class="form-signin" action="login" method="post">
         <h4 class="form-signin-heading">Please sign in</h4>
         <input type="text" class="input-block-level" name="login[userlogin]" placeholder="User Name">

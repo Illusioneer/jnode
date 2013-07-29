@@ -10,23 +10,12 @@ exports.list = function(req, res){
 };
 
 exports.login = function(req,res){
-    var now = Date.now();
-    console.log("USER LOGGING IN");
     var thesql = "SELECT * FROM users WHERE userlogin = '" + req.body.login.userlogin + "' AND userpass = '" + req.body.login.userpass + "';";
-    client.query(thesql);
-    console.log("QUERY: " + thesql);
-
     client.query(thesql, function (err, posts){
-
         if(err)
-            res.send('404 Not found', 404);
-
+            res.send('Wrong user name or password', 404);
         else {
-            console.log(JSON.stringify(posts.rows));
-            console.log("I Should be showing data here");
-            res.cookie('login_token', "blahblahblahblahblah");
-            res.cookie("logininfo", {userid:req.body.login.userid,password:req.body.login.password,loginstamp: Date.now()});
-            console.log("SESSION ID: " + req.session);
+            res.cookie("logininfo", {userid:posts.rows[0].userlogin,password:posts.rows[0].userpass,loginstamp: Date.now()});
             res.redirect('/');
         }
     });
@@ -48,10 +37,10 @@ exports.submit = function(req,res){
 exports.retrieve = function(req, res){
     var userlogin = "bowens",userpass = "oracle", thesql = "SELECT * FROM users WHERE userlogin = '" + userlogin + "' AND userpass = '" + userpass + "'";
     client.query(thesql, function (err, posts){
-
-        if(err)
+      
+        if(err) {
             res.send('404 Not found', 404);
-
+	}
         else {
 	    var jason = posts.rows[0].userdata;
 	    jason.Entry.lastchange = Date.now();
